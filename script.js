@@ -7,6 +7,8 @@ const scenes = {
 };
 
 const music = document.getElementById("music");
+const voice = document.getElementById("voice");
+const originalMusicVolume = 0.35;
 
 function showScene(scene) {
   Object.values(scenes).forEach(s => s.classList.remove("active"));
@@ -15,9 +17,26 @@ function showScene(scene) {
 }
 
 function tryMusic() {
+  music.volume = originalMusicVolume;
   music.play().catch(() => {
     // Browsers may block autoplay until the user interacts.
   });
+}
+
+function playFinalVoice() {
+  // Keep the music very soft while the personal voice is playing.
+  music.volume = 0.10;
+  voice.currentTime = 0;
+  voice.volume = 1.0;
+  voice.play().catch(() => {
+    // The Card button is a user interaction, so playback should normally be allowed.
+  });
+}
+
+function stopFinalVoice() {
+  voice.pause();
+  voice.currentTime = 0;
+  music.volume = originalMusicVolume;
 }
 
 document.getElementById("startBtn").addEventListener("click", () => {
@@ -51,9 +70,11 @@ document.getElementById("hallBtn").addEventListener("click", () => {
 
 document.getElementById("cardBtn").addEventListener("click", () => {
   showScene(scenes.card);
+  playFinalVoice();
 });
 
 document.getElementById("replayBtn").addEventListener("click", () => {
+  stopFinalVoice();
   document.getElementById("door").classList.remove("open");
   document.getElementById("girl").classList.remove("show");
   document.getElementById("welcomeText").classList.remove("show");
