@@ -293,381 +293,100 @@ h1 {
   bottom: 6%;
 }
 
-/* Walk / realistic cultural performance */
+/* Walk */
 #walkScene {
   align-items: center;
   justify-content: center;
-  background: #2d211a;
+  background: linear-gradient(#f6e8c4, #d6c08b);
 }
 
-.cultural-room {
+.corridor {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
   background:
-    linear-gradient(rgba(255,244,211,.08), rgba(53,32,20,.24)),
-    linear-gradient(180deg, #806048 0 58%, #4d3223 58% 100%);
+    repeating-linear-gradient(90deg, rgba(117,76,39,.08) 0 8px, transparent 8px 80px),
+    linear-gradient(#ead6aa, #b99055);
 }
 
-.room-ceiling {
+.floor-pattern {
   position: absolute;
-  inset: 0 0 auto;
-  height: 17%;
-  background: linear-gradient(#3a271e, #614535);
-  box-shadow: inset 0 -12px rgba(255,213,132,.12);
+  bottom: 0;
+  width: 100%;
+  height: 25%;
+  background: repeating-linear-gradient(90deg, #8b643d 0 3px, transparent 3px 55px);
+  opacity: .35;
 }
 
-.room-ceiling::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 8px;
-  height: 3px;
-  background: rgba(225,177,91,.45);
-}
-
-.wood-panel {
-  position: absolute;
-  inset: 17% 0 0;
-  background:
-    repeating-linear-gradient(90deg, rgba(255,218,159,.08) 0 2px, transparent 2px 115px),
-    linear-gradient(90deg, #765039, #986d48 50%, #6b4934);
-}
-
-.wood-panel::before,
-.wood-panel::after {
-  content: "";
-  position: absolute;
-  top: 5%;
-  bottom: 28%;
-  width: 14%;
-  border: 2px solid rgba(232,192,123,.32);
-}
-
-.wood-panel::before { left: 4%; }
-.wood-panel::after { right: 4%; }
-
-.brass-lamp {
+.wall-art {
   position: absolute;
   top: 8%;
-  width: 28px;
-  height: 48px;
-  border-radius: 0 0 50% 50%;
-  background: linear-gradient(90deg, #8d5b1c, #efc85d, #8d5b1c);
-  box-shadow: 0 0 30px rgba(255,193,70,.45);
-  z-index: 5;
-}
-
-.brass-lamp::before {
-  content: "";
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  width: 2px;
-  height: 18px;
-  background: #d5aa62;
-}
-
-.brass-lamp::after {
-  content: "";
-  position: absolute;
-  top: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 14px;
-  border-radius: 50% 50% 45% 45%;
-  background: #ffe39a;
-  box-shadow: 0 0 18px #ffc94f;
-}
-
-.lamp-one { left: 13%; }
-.lamp-two { right: 13%; }
-
-.performance-area {
-  position: absolute;
-  left: 50%;
-  top: 18%;
-  width: min(82vw, 850px);
-  height: 47%;
-  transform: translateX(-50%);
-}
-
-.performance-stage {
-  position: absolute;
-  left: 5%;
-  right: 5%;
-  bottom: 2%;
-  height: 18%;
-  border-radius: 50% 50% 8px 8px;
-  background: linear-gradient(#a46d3f, #5a3522);
-  box-shadow: 0 10px 25px rgba(0,0,0,.3);
-}
-
-.stage-glow {
-  position: absolute;
-  inset: -8% 10% 10%;
-  background: radial-gradient(ellipse at center, rgba(255,220,142,.36), transparent 68%);
+  left: 8%;
+  font-size: 70px;
 }
 
 .performer {
   position: absolute;
-  bottom: 12%;
-  width: 150px;
-  height: 240px;
-  transform-origin: 50% 90%;
-  animation: livePerformance 3.2s ease-in-out infinite;
-  z-index: 4;
+  top: 28%;
+  text-align: center;
+  animation: dance 2.5s ease-in-out infinite;
 }
 
-.kathakali { left: 14%; }
-.bharatanatyam { right: 14%; animation-delay: -1.4s; }
-
-.dancer-head {
-  position: absolute;
-  left: 50%;
-  top: 8px;
-  width: 44px;
-  height: 48px;
-  transform: translateX(-50%);
-  border-radius: 48% 48% 45% 45%;
-  z-index: 3;
-}
-
-.kathakali-head {
-  width: 58px;
-  height: 56px;
-  background: radial-gradient(circle at 50% 48%, #e4a04e 0 28%, #26351f 29% 40%, #c62e25 41% 60%, #f2c75e 61% 100%);
-  border: 4px solid #e9bb55;
-}
-
-.kathakali-crown {
-  position: absolute;
-  left: 50%;
-  top: -30px;
-  width: 80px;
-  height: 50px;
-  transform: translateX(-50%);
-  border-radius: 50% 50% 15% 15%;
-  background: linear-gradient(#dcae46, #8b4d22);
-  border: 4px solid #efc85b;
-}
-
-.kathakali-face::before,
-.kathakali-face::after {
-  content: "";
-  position: absolute;
-  top: 22px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #fff2bf;
-}
-.kathakali-face::before { left: 13px; }
-.kathakali-face::after { right: 13px; }
-
-.dancer-torso {
-  position: absolute;
-  left: 50%;
-  top: 64px;
-  transform: translateX(-50%);
-}
-
-.kathakali-torso {
-  width: 105px;
-  height: 125px;
-  border-radius: 48% 48% 18% 18%;
-  background: radial-gradient(circle at 50% 10%, #f1ca54 0 13%, transparent 14%), conic-gradient(from 20deg, #d8a83e, #4b7d47, #bd352b, #d9a63f, #4b7d47, #d8a83e);
-  border: 5px solid #d6a23c;
-}
-
-.bharatanatyam-head {
-  background: #9c633e;
-  box-shadow: inset -4px -5px rgba(0,0,0,.08);
-}
-
-.bharatanatyam-head::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: -13px;
-  width: 74px;
-  height: 25px;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  border: 5px solid #d9ad48;
-  background: #4b2e21;
-}
-
-.bharatanatyam-torso {
-  width: 92px;
-  height: 130px;
-  border-radius: 45% 45% 12px 12px;
-  background: linear-gradient(90deg, #a92f35 0 28%, #e1b348 28% 36%, #bd3d42 36% 64%, #e1b348 64% 72%, #8f2930 72%);
-  border: 3px solid #e1b348;
-}
-
-.dancer-arm,
-.dancer-leg {
-  position: absolute;
-  background: #a56a43;
-  border-radius: 999px;
-  transform-origin: top center;
-  z-index: 2;
-}
-
-.dancer-arm { width: 12px; height: 90px; top: 73px; }
-.ka-left { left: 24px; transform: rotate(62deg); }
-.ka-right { right: 24px; transform: rotate(-62deg); }
-.ba-left { left: 28px; transform: rotate(78deg); }
-.ba-right { right: 28px; transform: rotate(-78deg); }
-
-.dancer-leg { width: 16px; height: 100px; top: 174px; }
-.ka-leg-left { left: 52px; transform: rotate(14deg); }
-.ka-leg-right { right: 52px; transform: rotate(-14deg); }
-.ba-leg-left { left: 50px; transform: rotate(27deg); }
-.ba-leg-right { right: 50px; transform: rotate(-27deg); }
-
-.performance-label {
-  position: absolute;
-  bottom: -3%;
-  padding: 5px 12px;
-  border-radius: 20px;
-  background: rgba(35,20,13,.72);
-  color: #f9df9a;
+.performer span {
+  display: block;
+  margin-top: 8px;
   font-size: 12px;
-  letter-spacing: 1px;
-  z-index: 6;
-}
-.kathakali-label { left: 15%; }
-.bharatanatyam-label { right: 12%; }
-
-@keyframes livePerformance {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50% { transform: translateY(-7px) rotate(2deg); }
+  font-weight: 600;
+  color: #6a431d;
 }
 
-/* Audience: clearly seated and looking toward the performers */
-.audience {
-  position: absolute;
-  left: 50%;
-  bottom: 12%;
-  width: min(92vw, 900px);
-  height: 25%;
-  transform: translateX(-50%);
-  z-index: 8;
+.kathakali { left: 15%; }
+.bharatanatyam { right: 15%; animation-delay: -.9s; }
+
+.performer-face {
+  font-size: 70px;
 }
 
-.audience-person {
-  position: absolute;
-  bottom: 0;
-  width: 100px;
-  height: 135px;
+.performer-body {
+  width: 75px;
+  height: 90px;
+  margin: -12px auto 0;
+  background: #c88a2e;
+  border-radius: 45% 45% 20px 20px;
 }
 
-.audience-person i {
-  position: absolute;
-  left: 50%;
-  top: 4px;
-  width: 42px;
-  height: 42px;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: #9a6342;
-  box-shadow: inset -4px -3px rgba(0,0,0,.12);
+@keyframes dance {
+  50% { transform: translateY(-12px) rotate(3deg); }
 }
 
-.audience-person b {
-  position: absolute;
-  left: 50%;
-  top: 38px;
-  width: 76px;
-  height: 95px;
-  transform: translateX(-50%);
-  border-radius: 35px 35px 8px 8px;
-  background: linear-gradient(#394c5a, #222d35);
-}
-
-.person-one { left: 0; transform: scale(.82); }
-.person-two { left: 14%; transform: scale(.95); }
-.person-three { left: 29%; transform: scale(1.04); }
-.person-four { right: 29%; transform: scale(1.04); }
-.person-five { right: 14%; transform: scale(.95); }
-.person-six { right: 0; transform: scale(.82); }
-
-.person-one b, .person-six b { background: linear-gradient(#6d4b3d, #302620); }
-.person-two b, .person-five b { background: linear-gradient(#6a8055, #34422b); }
-.person-three b, .person-four b { background: linear-gradient(#8a4b3f, #452720); }
-
-/* Gowri entering from the side, watching the performance */
 .walking-girl {
   position: absolute;
+  bottom: 26%;
   left: 50%;
-  bottom: 13%;
-  width: 60px;
-  height: 145px;
-  transform: translateX(-50%);
-  z-index: 10;
-  animation: walkInRoom 5s ease-in-out infinite;
+  font-size: 80px;
+  animation: walk 3s ease-in-out infinite;
 }
 
-.walking-head {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 40px;
-  height: 44px;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: #a96d47;
-}
-
-.walking-body {
-  position: absolute;
-  top: 38px;
-  left: 50%;
-  width: 54px;
-  height: 105px;
-  transform: translateX(-50%);
-  border-radius: 22px 22px 8px 8px;
-  background: linear-gradient(90deg, #8d3451, #d29a55, #8d3451);
-  border: 2px solid rgba(244,211,137,.6);
-}
-
-@keyframes walkInRoom {
-  0%, 100% { transform: translateX(-150px); }
-  50% { transform: translateX(150px); }
+@keyframes walk {
+  0%, 100% { transform: translateX(-100px); }
+  50% { transform: translateX(100px); }
 }
 
 .walk-message {
   position: absolute;
-  bottom: 3%;
+  bottom: 12%;
   left: 50%;
   transform: translateX(-50%);
-  width: min(90%, 590px);
+  width: min(90%, 500px);
   text-align: center;
-  padding: 13px 18px;
-  background: rgba(255,248,230,.92);
-  border: 1px solid rgba(210,169,93,.55);
-  border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.2);
-  z-index: 20;
-}
-
-.walk-message p {
-  line-height: 1.55;
-  color: #4e3826;
-  font-size: clamp(13px, 2vw, 16px);
+  padding: 15px;
+  background: rgba(255,255,255,.72);
+  border-radius: 20px;
 }
 
 #hallBtn {
   position: absolute;
-  bottom: 1.3%;
-  right: 4%;
-  z-index: 25;
-  padding: 10px 18px;
+  bottom: 4%;
 }
 
 /* Hall */
@@ -699,106 +418,33 @@ h1 {
 
 .pookalam {
   position: relative;
-  width: min(58vw, 390px);
-  height: min(58vw, 390px);
+  width: min(55vw, 360px);
+  height: min(55vw, 360px);
   border-radius: 50%;
-  box-shadow: 0 24px 55px rgba(52,30,10,.34), inset 0 0 0 8px rgba(255,248,220,.65);
-  background:
-    radial-gradient(circle at center, #f7e8a5 0 8%, transparent 8.5%),
-    #b64a28;
+  box-shadow: 0 20px 50px rgba(80,45,10,.3);
+  background: #6c3820;
   padding: 15px;
-  overflow: visible;
-}
-
-.pookalam::before {
-  content: '';
-  position: absolute;
-  inset: 3%;
-  border-radius: 50%;
-  border: 8px solid #f3c84b;
-  box-shadow: inset 0 0 0 6px #f8f0c9;
-  pointer-events: none;
-}
-
-.pookalam::after {
-  content: '';
-  position: absolute;
-  inset: 10%;
-  border-radius: 50%;
-  background: repeating-conic-gradient(#fff8df 0 6deg, transparent 6deg 15deg);
-  opacity: .95;
-  pointer-events: none;
 }
 
 .ring {
   position: absolute;
-  inset: 11%;
+  inset: 8%;
   border-radius: 50%;
-  border: 30px solid #f4bd35;
-  z-index: 2;
+  border: 35px solid #f4bd35;
 }
 
-.ring2 { inset: 20%; border-color: #d94f45; }
-.ring3 { inset: 29%; border-color: #f0a72f; }
-.ring4 { inset: 38%; border-color: #f7df69; }
-.ring5 { inset: 46%; border-color: #c94c32; }
+.ring2 { inset: 17%; border-color: #d94f45; }
+.ring3 { inset: 27%; border-color: #f0a72f; }
+.ring4 { inset: 37%; border-color: #e7d45b; }
+.ring5 { inset: 46%; border-color: #d94f45; }
 
-.pookalam-petal-field {
+.pookalam-center {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  z-index: 1;
-  opacity: .95;
+  display: grid;
+  place-items: center;
+  font-size: 55px;
 }
-
-.petals-yellow {
-  background: repeating-conic-gradient(from 4deg, #ffd447 0 5deg, transparent 5deg 12deg);
-  transform: scale(.86);
-}
-
-.petals-orange {
-  background: repeating-conic-gradient(from 10deg, #f28b25 0 4deg, transparent 4deg 18deg);
-  transform: scale(.63);
-}
-
-.petals-white {
-  background: repeating-conic-gradient(from 2deg, #fff4d2 0 3deg, transparent 3deg 24deg);
-  transform: scale(.40);
-}
-
-.center-flower {
-  position: absolute;
-  inset: 39%;
-  z-index: 4;
-  border-radius: 50%;
-  background: #e6a92d;
-  box-shadow: 0 0 0 8px #fff1bd, 0 5px 12px rgba(80,45,10,.28);
-}
-
-.center-flower span {
-  position: absolute;
-  width: 55%;
-  height: 55%;
-  left: 22.5%;
-  top: -18%;
-  border-radius: 55% 55% 45% 45%;
-  background: #fff3c9;
-  transform-origin: 50% 120%;
-}
-.center-flower span:nth-child(2) { transform: rotate(90deg); }
-.center-flower span:nth-child(3) { transform: rotate(180deg); }
-.center-flower span:nth-child(4) { transform: rotate(270deg); }
-.center-flower b { position:absolute; inset:0; display:grid; place-items:center; color:#b84b24; font-size:20px; }
-
-.pookalam-diya {
-  position: absolute;
-  bottom: -7%;
-  font-size: 28px;
-  z-index: 6;
-  filter: drop-shadow(0 0 8px rgba(255,190,60,.75));
-}
-.diya-left { left: 7%; }
-.diya-right { right: 7%; }
 
 .hall-title {
   position: absolute;
