@@ -1,94 +1,92 @@
-const scenes = {
-  intro: document.getElementById("intro"),
-  door: document.getElementById("doorScene"),
-  walk: document.getElementById("walkScene"),
-  hall: document.getElementById("hallScene"),
-  card: document.getElementById("cardScene")
-};
+(() => {
+  'use strict';
 
-const music = document.getElementById("music");
-const voice = document.getElementById("voice");
-const originalMusicVolume = 0.32;
-let revealTimer = null;
+  const scenes = {
+    intro: document.getElementById('introScene'),
+    door: document.getElementById('doorScene'),
+    inside: document.getElementById('insideScene'),
+    compliment: document.getElementById('complimentScene'),
+    mahabali: document.getElementById('mahabaliScene'),
+    hall: document.getElementById('hallDoorScene'),
+    reveal: document.getElementById('revealScene'),
+    postcard: document.getElementById('postcardScene')
+  };
 
-function showScene(scene) {
-  Object.values(scenes).forEach(s => s.classList.remove("active"));
-  scene.classList.add("active");
-  window.scrollTo(0, 0);
-}
+  const voice = document.getElementById('voice');
+  const hallDoor = document.getElementById('closedHallDoor');
+  const doorLock = document.getElementById('doorLock');
+  let current = 'intro';
+  let voiceStarted = false;
 
-function tryMusic(volume = originalMusicVolume) {
-  music.volume = volume;
-  music.play().catch(() => {});
-}
+  function show(name) {
+    Object.entries(scenes).forEach(([key, node]) => {
+      node.classList.toggle('active', key === name);
+    });
+    current = name;
 
-function resetHallReveal() {
-  clearTimeout(revealTimer);
-  document.getElementById("pookalamReveal").classList.remove("revealed");
-  document.getElementById("revealText").classList.remove("show");
-  document.getElementById("cardBtn").classList.add("hidden");
-}
+    // Reset scene-specific one-shot states whenever a scene is entered.
+    if (name === 'door') {
+      document.getElementById('comeInside')?.classList.add('hidden');
+      window.setTimeout(() => document.getElementById('comeInside')?.classList.remove('hidden'), 2100);
+    }
 
-function startHallReveal() {
-  resetHallReveal();
-  showScene(scenes.hall);
+    if (name === 'hall') {
+      hallDoor?.classList.remove('opening');
+      if (doorLock) doorLock.style.opacity = '1';
+    }
 
-  // Give the camera a moment to settle before revealing the pookalam.
-  revealTimer = setTimeout(() => {
-    document.getElementById("pookalamReveal").classList.add("revealed");
-    document.getElementById("revealText").classList.add("show");
+    if (name === 'reveal') {
+      voiceStarted = false;
+      if (voice) {
+        try { voice.currentTime = 0; } catch (_) {}
+        const p = voice.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+        voiceStarted = true;
+      }
+    }
+  }
 
-    // Personal voice starts exactly with the flower-face reveal.
-    music.volume = 0.08;
-    voice.currentTime = 0;
-    voice.volume = 1.0;
-    voice.play().catch(() => {});
+  function click(id, fn) {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', fn);
+  }
 
-    setTimeout(() => {
-      document.getElementById("cardBtn").classList.remove("hidden");
-    }, 2500);
-  }, 1400);
-}
+  click('enterHome', () => show('door'));
+  click('comeInside', () => show('inside'));
+  click('continueInside', () => show('compliment'));
+  click('continueCompliment', () => show('mahabali'));
+  click('readyHall', () => show('hall'));
 
-function stopVoice() {
-  voice.pause();
-  voice.currentTime = 0;
-  music.volume = originalMusicVolume;
-}
+  click('enterHall', () => {
+    // The hall starts locked. User action unlocks it, then both doors open.
+    hallDoor?.classList.add('opening');
+    window.setTimeout(() => show('reveal'), 1350);
+  });
 
-document.getElementById("startBtn").addEventListener("click", () => {
-  tryMusic();
-  showScene(scenes.door);
+  click('postcardBtn', () => show('postcard'));
+  click('restart', () => {
+    if (voice) {
+      voice.pause();
+      try { voice.currentTime = 0; } catch (_) {}
+    }
+    show('intro');
+  });
 
-  setTimeout(() => document.getElementById("door").classList.add("open"), 700);
-  setTimeout(() => document.getElementById("girl").classList.add("show"), 1600);
-  setTimeout(() => document.getElementById("welcomeText").classList.add("show"), 2200);
-  setTimeout(() => document.getElementById("enterBtn").classList.remove("hidden"), 3200);
-});
+  if (voice) {
+    voice.addEventListener('ended', () => {
+      if (current === 'reveal') show('postcard');
+    });
+  }
 
-document.getElementById("enterBtn").addEventListener("click", () => {
-  showScene(scenes.walk);
-  tryMusic(0.28);
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      if (voice) {
+        voice.pause();
+        try { voice.currentTime = 0; } catch (_) {}
+      }
+      show('intro');
+    }
+  });
 
-  // The visitor walks into the celebration; no separate corridor scene.
-  setTimeout(() => {
-    document.getElementById("hallBtn").classList.remove("hidden");
-  }, 5200);
-});
-
-document.getElementById("hallBtn").addEventListener("click", startHallReveal);
-
-document.getElementById("cardBtn").addEventListener("click", () => {
-  showScene(scenes.card);
-});
-
-document.getElementById("replayBtn").addEventListener("click", () => {
-  stopVoice();
-  resetHallReveal();
-  document.getElementById("door").classList.remove("open");
-  document.getElementById("girl").classList.remove("show");
-  document.getElementById("welcomeText").classList.remove("show");
-  document.getElementById("enterBtn").classList.add("hidden");
-  document.getElementById("hallBtn").classList.add("hidden");
-  showScene(scenes.intro);
-});
+  show('intro');
+})();
