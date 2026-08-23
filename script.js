@@ -23,13 +23,13 @@ function tryMusic() {
   });
 }
 
-function playFinalVoice() {
-  // Keep the music very soft while the personal voice is playing.
+function playHallVoice() {
+  // Play Gowri's personal voice as soon as the hall scene opens.
   music.volume = 0.10;
   voice.currentTime = 0;
   voice.volume = 1.0;
   voice.play().catch(() => {
-    // The Card button is a user interaction, so playback should normally be allowed.
+    // The Hall button is a user interaction, so playback should normally be allowed.
   });
 }
 
@@ -66,11 +66,11 @@ document.getElementById("enterBtn").addEventListener("click", () => {
 
 document.getElementById("hallBtn").addEventListener("click", () => {
   showScene(scenes.hall);
+  playHallVoice();
 });
 
 document.getElementById("cardBtn").addEventListener("click", () => {
   showScene(scenes.card);
-  playFinalVoice();
 });
 
 document.getElementById("replayBtn").addEventListener("click", () => {
