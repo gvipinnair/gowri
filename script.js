@@ -8,7 +8,8 @@ const scenes = {
 
 const music = document.getElementById("music");
 const voice = document.getElementById("voice");
-const originalMusicVolume = 0.35;
+const originalMusicVolume = 0.32;
+let revealTimer = null;
 
 function showScene(scene) {
   Object.values(scenes).forEach(s => s.classList.remove("active"));
@@ -16,24 +17,40 @@ function showScene(scene) {
   window.scrollTo(0, 0);
 }
 
-function tryMusic() {
-  music.volume = originalMusicVolume;
-  music.play().catch(() => {
-    // Browsers may block autoplay until the user interacts.
-  });
+function tryMusic(volume = originalMusicVolume) {
+  music.volume = volume;
+  music.play().catch(() => {});
 }
 
-function playHallVoice() {
-  // Play Gowri's personal voice as soon as the hall scene opens.
-  music.volume = 0.10;
-  voice.currentTime = 0;
-  voice.volume = 1.0;
-  voice.play().catch(() => {
-    // The Hall button is a user interaction, so playback should normally be allowed.
-  });
+function resetHallReveal() {
+  clearTimeout(revealTimer);
+  document.getElementById("pookalamReveal").classList.remove("revealed");
+  document.getElementById("revealText").classList.remove("show");
+  document.getElementById("cardBtn").classList.add("hidden");
 }
 
-function stopFinalVoice() {
+function startHallReveal() {
+  resetHallReveal();
+  showScene(scenes.hall);
+
+  // Give the camera a moment to settle before revealing the pookalam.
+  revealTimer = setTimeout(() => {
+    document.getElementById("pookalamReveal").classList.add("revealed");
+    document.getElementById("revealText").classList.add("show");
+
+    // Personal voice starts exactly with the flower-face reveal.
+    music.volume = 0.08;
+    voice.currentTime = 0;
+    voice.volume = 1.0;
+    voice.play().catch(() => {});
+
+    setTimeout(() => {
+      document.getElementById("cardBtn").classList.remove("hidden");
+    }, 2500);
+  }, 1400);
+}
+
+function stopVoice() {
   voice.pause();
   voice.currentTime = 0;
   music.volume = originalMusicVolume;
@@ -43,41 +60,35 @@ document.getElementById("startBtn").addEventListener("click", () => {
   tryMusic();
   showScene(scenes.door);
 
-  setTimeout(() => {
-    document.getElementById("door").classList.add("open");
-  }, 700);
-
-  setTimeout(() => {
-    document.getElementById("girl").classList.add("show");
-  }, 1600);
-
-  setTimeout(() => {
-    document.getElementById("welcomeText").classList.add("show");
-  }, 2400);
-
-  setTimeout(() => {
-    document.getElementById("enterBtn").classList.remove("hidden");
-  }, 3500);
+  setTimeout(() => document.getElementById("door").classList.add("open"), 700);
+  setTimeout(() => document.getElementById("girl").classList.add("show"), 1600);
+  setTimeout(() => document.getElementById("welcomeText").classList.add("show"), 2200);
+  setTimeout(() => document.getElementById("enterBtn").classList.remove("hidden"), 3200);
 });
 
 document.getElementById("enterBtn").addEventListener("click", () => {
   showScene(scenes.walk);
+  tryMusic(0.28);
+
+  // The visitor walks into the celebration; no separate corridor scene.
+  setTimeout(() => {
+    document.getElementById("hallBtn").classList.remove("hidden");
+  }, 5200);
 });
 
-document.getElementById("hallBtn").addEventListener("click", () => {
-  showScene(scenes.hall);
-  playHallVoice();
-});
+document.getElementById("hallBtn").addEventListener("click", startHallReveal);
 
 document.getElementById("cardBtn").addEventListener("click", () => {
   showScene(scenes.card);
 });
 
 document.getElementById("replayBtn").addEventListener("click", () => {
-  stopFinalVoice();
+  stopVoice();
+  resetHallReveal();
   document.getElementById("door").classList.remove("open");
   document.getElementById("girl").classList.remove("show");
   document.getElementById("welcomeText").classList.remove("show");
   document.getElementById("enterBtn").classList.add("hidden");
+  document.getElementById("hallBtn").classList.add("hidden");
   showScene(scenes.intro);
 });

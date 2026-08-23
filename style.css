@@ -293,176 +293,280 @@ h1 {
   bottom: 6%;
 }
 
-/* Walk */
+/* Cinematic entry */
 #walkScene {
   align-items: center;
   justify-content: center;
-  background: linear-gradient(#f6e8c4, #d6c08b);
+  background: #261b13;
 }
 
-.corridor {
+.cinema-hall {
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   background:
-    repeating-linear-gradient(90deg, rgba(117,76,39,.08) 0 8px, transparent 8px 80px),
-    linear-gradient(#ead6aa, #b99055);
+    radial-gradient(circle at 50% 26%, rgba(255,236,174,.55), transparent 24%),
+    linear-gradient(180deg, #4c392b 0%, #806044 46%, #b58a57 100%);
+  perspective: 1100px;
 }
 
-.floor-pattern {
+.hall-ceiling-glow {
   position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 25%;
-  background: repeating-linear-gradient(90deg, #8b643d 0 3px, transparent 3px 55px);
-  opacity: .35;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 10%, rgba(255,222,135,.6), transparent 42%);
 }
 
-.wall-art {
+.wood-pillar {
   position: absolute;
-  top: 8%;
-  left: 8%;
-  font-size: 70px;
+  top: -5%;
+  width: 10%;
+  height: 110%;
+  background: linear-gradient(90deg, #3a2015, #74482d 45%, #3a2015);
+  box-shadow: 0 0 25px rgba(0,0,0,.3);
+  z-index: 4;
 }
+.pillar-left { left: 4%; }
+.pillar-right { right: 4%; }
 
-.performer {
+.entrance-arch {
   position: absolute;
-  top: 28%;
-  text-align: center;
-  animation: dance 2.5s ease-in-out infinite;
-}
-
-.performer span {
-  display: block;
-  margin-top: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #6a431d;
-}
-
-.kathakali { left: 15%; }
-.bharatanatyam { right: 15%; animation-delay: -.9s; }
-
-.performer-face {
-  font-size: 70px;
-}
-
-.performer-body {
-  width: 75px;
-  height: 90px;
-  margin: -12px auto 0;
-  background: #c88a2e;
-  border-radius: 45% 45% 20px 20px;
-}
-
-@keyframes dance {
-  50% { transform: translateY(-12px) rotate(3deg); }
-}
-
-.walking-girl {
-  position: absolute;
-  bottom: 26%;
+  top: 7%;
   left: 50%;
-  font-size: 80px;
-  animation: walk 3s ease-in-out infinite;
+  width: 42%;
+  height: 72%;
+  transform: translateX(-50%);
+  border: 18px solid #6b4228;
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0;
+  box-shadow: inset 0 0 30px rgba(0,0,0,.2);
 }
 
-@keyframes walk {
-  0%, 100% { transform: translateX(-100px); }
-  50% { transform: translateX(100px); }
-}
-
-.walk-message {
+.entrance-pookalam {
   position: absolute;
-  bottom: 12%;
+  left: 50%;
+  bottom: 9%;
+  width: 170px;
+  height: 170px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #e7a933;
+  box-shadow: 0 15px 30px rgba(45,24,10,.3);
+  z-index: 3;
+}
+.mini-pookalam-ring {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  border: 20px solid #e6c24c;
+}
+.ring-two { inset: 35px; border-color: #d76b31; }
+.mini-pookalam-center {
+  position: absolute;
+  inset: 58px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #fff0ad;
+  font-size: 32px;
+}
+
+.audience {
+  position: absolute;
+  bottom: 27%;
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+  font-size: clamp(34px, 5vw, 58px);
+  filter: drop-shadow(0 8px 5px rgba(0,0,0,.25));
+}
+.audience-left { left: 8%; }
+.audience-right { right: 8%; }
+.audience span:nth-child(2), .audience span:nth-child(4) { transform: translateY(12px); }
+
+.performance-stage {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 45%;
+  height: 48%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+.stage-light {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  width: 70%;
+  height: 90%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(255,225,130,.42), transparent 68%);
+}
+
+.performer { position: absolute; bottom: 7%; text-align: center; }
+.kathakali-realistic { left: 8%; animation: stageDance 2.8s ease-in-out infinite; }
+.bharatanatyam-realistic { right: 8%; animation: stageDance 2.5s ease-in-out infinite reverse; }
+.k-head, .b-head { font-size: clamp(55px, 7vw, 86px); }
+.k-costume {
+  width: 105px; height: 110px; margin: -12px auto 0;
+  background: radial-gradient(circle at 50% 20%, #f5e7b1 0 16%, transparent 17%),
+              linear-gradient(#bd2926 0 38%, #e5d18a 38% 55%, #a31f25 55%);
+  border-radius: 50% 50% 20% 20%;
+  border: 7px solid #e5bf53;
+}
+.b-costume {
+  width: 90px; height: 105px; margin: -8px auto 0;
+  background: linear-gradient(#fff4d7 0 60%, #d39a34 60%);
+  border-radius: 45% 45% 18px 18px;
+  border-bottom: 12px solid #b7761f;
+}
+@keyframes stageDance { 50% { transform: translateY(-9px) rotate(2deg); } }
+
+.walking-girl-realistic {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  z-index: 8;
+  font-size: clamp(65px, 8vw, 100px);
+  animation: walkForward 5.2s ease-in-out both;
+  filter: drop-shadow(0 10px 8px rgba(0,0,0,.3));
+}
+@keyframes walkForward {
+  from { transform: translateX(-45vw) scale(.72); opacity: .5; }
+  55% { transform: translateX(-8vw) scale(.88); opacity: 1; }
+  to { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+.camera-caption {
+  position: absolute;
+  bottom: 6%;
   left: 50%;
   transform: translateX(-50%);
-  width: min(90%, 500px);
+  color: rgba(255,248,225,.95);
+  font-family: "Playfair Display", serif;
+  font-size: clamp(18px, 3vw, 28px);
   text-align: center;
-  padding: 15px;
-  background: rgba(255,255,255,.72);
-  border-radius: 20px;
+  text-shadow: 0 3px 14px rgba(0,0,0,.6);
+  z-index: 10;
+  animation: captionFade 5s ease both;
 }
+@keyframes captionFade { from { opacity: 0; } 25% { opacity: 1; } 75% { opacity: 1; } to { opacity: 0; } }
 
 #hallBtn {
   position: absolute;
   bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
 }
 
-/* Hall */
+/* Flower-face reveal */
 #hallScene {
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 50% 40%, #fff2c6, #d6a85c);
+  background: #1d1710;
 }
 
-.hall {
+.reveal-hall {
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.hanging-lamp {
+.reveal-background {
   position: absolute;
-  top: 7%;
-  font-size: 65px;
-  animation: lampGlow 1.8s ease-in-out infinite;
+  inset: -8%;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(255,218,121,.5), transparent 22%),
+    linear-gradient(180deg, #4d3827 0%, #8c6745 58%, #b88b59 100%);
+  transform: scale(1.08);
+  animation: cameraSettle 9s ease-out both;
 }
+@keyframes cameraSettle { from { transform: scale(1.18); } to { transform: scale(1.03); } }
 
-@keyframes lampGlow {
-  50% { filter: drop-shadow(0 0 18px #ffd35c); }
-}
-
-.pookalam {
+.reveal-background::before,
+.reveal-background::after {
+  content: "";
   position: absolute;
+  top: 0;
+  width: 13%;
+  height: 100%;
+  background: linear-gradient(90deg, #321c12, #71462b, #321c12);
+}
+.reveal-background::before { left: 4%; }
+.reveal-background::after { right: 4%; }
+
+.reveal-lamps {
+  position: absolute;
+  top: 8%;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: min(62vw, 520px);
-  aspect-ratio: 1 / 1;
+  width: min(85%, 900px);
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+  font-size: clamp(28px, 4vw, 48px);
+  filter: drop-shadow(0 0 12px rgba(255,205,75,.8));
+}
+
+.pookalam-reveal {
+  position: relative;
+  z-index: 5;
+  width: min(67vw, 600px);
+  aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(80,45,10,.3);
-  border: 8px solid rgba(255,250,230,.9);
-  animation: pookalamIn 1.1s ease-out both;
+  border: 8px solid rgba(255,249,225,.9);
+  box-shadow: 0 25px 70px rgba(25,12,4,.55), 0 0 70px rgba(255,196,67,.16);
+  transform: scale(.68);
+  opacity: 0;
+  filter: brightness(.72) saturate(.82);
+  transition: transform 2.1s cubic-bezier(.2,.75,.15,1), opacity 1.2s ease, filter 1.7s ease;
 }
-
-.pookalam img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.pookalam-reveal.revealed {
+  opacity: 1;
+  transform: scale(1);
+  filter: brightness(1) saturate(1.08);
 }
+.pookalam-reveal img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-@keyframes pookalamIn {
-  from { opacity: 0; transform: translate(-50%, -50%) scale(.88); }
-  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-}
-
-.hall-title {
+.reveal-shine {
   position: absolute;
-  top: 15%;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(115deg, transparent 25%, rgba(255,255,255,.45) 48%, transparent 58%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+.pookalam-reveal.revealed .reveal-shine { animation: shine 2.1s .4s ease-out both; }
+@keyframes shine { to { transform: translateX(120%); } }
+
+.reveal-text {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%) translateY(18px);
   text-align: center;
-  font-family: "Playfair Display", serif;
-  color: var(--green);
+  color: white;
+  z-index: 10;
+  opacity: 0;
+  transition: 1s ease;
+  text-shadow: 0 4px 20px rgba(0,0,0,.65);
 }
+.reveal-text.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.reveal-small { display: block; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; }
+.reveal-text strong { display: block; margin-top: 4px; font-family: "Playfair Display", serif; font-size: clamp(38px, 7vw, 68px); }
 
-.hall-title span {
-  display: block;
-  font-size: 20px;
-}
-
-.hall-title strong {
-  display: block;
-  font-size: clamp(45px, 8vw, 72px);
-}
-
-#cardBtn {
+.reveal-card-btn {
   position: absolute;
-  bottom: 7%;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
 }
 
 /* Postcard */
@@ -563,26 +667,23 @@ h1 {
     top: 8%;
   }
 
-  .performer-face {
-    font-size: 48px;
-  }
-
-  .performer-body {
-    width: 52px;
-    height: 65px;
-  }
-
-  .kathakali { left: 7%; }
-  .bharatanatyam { right: 7%; }
-
-  .pookalam {
-    width: min(72vw, 320px);
-    height: min(72vw, 320px);
-  }
-
-  .ring {
-    border-width: 25px;
-  }
+  .performance-stage { width: 72%; top: 23%; }
+  .kathakali-realistic { left: -3%; }
+  .bharatanatyam-realistic { right: -3%; }
+  .k-costume { width: 72px; height: 82px; }
+  .b-costume { width: 65px; height: 78px; }
+  .audience { font-size: 34px; bottom: 30%; gap: 2px; }
+  .audience-left { left: 1%; }
+  .audience-right { right: 1%; }
+  .entrance-arch { width: 70%; }
+  .entrance-pookalam { width: 120px; height: 120px; bottom: 11%; }
+  .mini-pookalam-ring { border-width: 14px; }
+  .ring-two { inset: 25px; }
+  .mini-pookalam-center { inset: 43px; font-size: 22px; }
+  .pookalam-reveal { width: min(82vw, 360px); }
+  .reveal-text { bottom: 13%; }
+  .reveal-small { font-size: 10px; }
+  .reveal-text strong { font-size: 40px; }
 
   .stamp {
     width: 48px;
